@@ -1,17 +1,20 @@
 {
-  "name": "e",
+  "name": "point-hub",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "dev": "cross-env DEBUG=e:server ENV=development NODE_ENV=development node point-server/bin/www",
+    "start": "node point-server/bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "cross-env": "^6.0.3",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "mysql": "^2.17.1",
     "node-sass-middleware": "0.11.0"
   }
 }
