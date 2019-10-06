@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes');
 var mysql = require('./mysql');
@@ -14,16 +13,15 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(async function(req,res,next){
+  res.set('Access-Control-Allow-Origin',req.headers.origin);
+  res.set('Access-Control-Allow-Credentials','true');
+  next();
+});
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({ type:'*/*' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: true, // true = .sass and false = .scss
-  sourceMap: true
-}));
 app.use(mysql);
 app.use('/sdk', express.static(path.join(__dirname, '../sdk')));
 app.use(express.static(path.join(__dirname, 'public')));
