@@ -12,5 +12,5 @@ script:
   - npm test
   - tsc
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t "pea3nut/point-hub:${$TRAVIS_BRANCH}" .
-  - docker push "pea3nut/point-hub:${$TRAVIS_BRANCH}"
+  - docker build -t "pea3nut/point-hub:${TRAVIS_BRANCH}" .
+  - docker push "pea3nut/point-hub:${TRAVIS_BRANCH}"
