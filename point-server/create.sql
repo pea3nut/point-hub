@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： localhost
--- 生成日期： 2019-10-06 09:21:52
+-- 生成日期： 2019-10-07 11:22:26
 -- 服务器版本： 5.5.47-0ubuntu0.14.04.1
 -- PHP 版本： 5.5.9-1ubuntu4.14
 
@@ -25,17 +25,17 @@ USE `<PEA_DATABASE_NAME>`;
 --
 
 CREATE TABLE `events` (
-  `id` int(11) NOT NULL DEFAULT '0',
-  `uid` int(20) NOT NULL,
-  `time` datetime NOT NULL,
-  `ip` char(200) NOT NULL,
-  `sdk_version` char(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `app_name` char(100) NOT NULL,
-  `duration` int(12) NOT NULL,
-  `referer` varchar(256) NOT NULL,
   `event_page` char(100) NOT NULL,
   `event_flag` varchar(100) NOT NULL,
-  `content` tinytext NOT NULL
+  `content` tinytext NOT NULL,
+  `uid` char(20) DEFAULT NULL,
+  `time` datetime NOT NULL,
+  `ip` char(200) NOT NULL,
+  `duration` int(12) NOT NULL,
+  `referer` varchar(256) NOT NULL,
+  `sdk_version` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -49,4 +49,14 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`id`),
   ADD KEY `app_name` (`app_name`,`event_page`,`event_flag`),
   ADD KEY `time` (`time`);
+
+--
+-- 在导出的表使用AUTO_INCREMENT
+--
+
+--
+-- 使用表AUTO_INCREMENT `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;

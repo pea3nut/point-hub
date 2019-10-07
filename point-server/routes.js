@@ -1,9 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const debug = require('debug')('e:server');
+const Marked = require('marked');
+const Fs = require('fs');
+const Path = require('path');
 
-
-/* GET home page. */
+router.get('/', function (req, res) {
+    console.log(Marked(Fs.readFileSync(Path.join(__dirname, '../README.md')).toString()));
+    res.render('index', {
+        title: 'Point Hub',
+        content: Marked(Fs.readFileSync(Path.join(__dirname, '../README.md')).toString()),
+    });
+});
 router.post('/events', function(req, res, next) {
     const keys = ['uid', 'time', 'ip', 'sdk_version', 'app_name', 'duration', 'referer', 'event_page', 'event_flag', 'content'];
     const sql = 'INSERT INTO `events`' +
