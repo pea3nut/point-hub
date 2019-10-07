@@ -14,7 +14,8 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-all-lang
 RUN tar -xJvf phpMyAdmin-4.9.1-all-languages.tar.xz
 RUN tar -xvJf node-v10.16.3-linux-x64.tar.xz
 
-RUN mv phpMyAdmin-4.9.1-all-languages /app/phpmyadmin
+RUN rm /app/*
+RUN mv phpMyAdmin-4.9.1-all-languages/* /app/
 RUN mv node-v10.16.3-linux-x64 /node
 
 WORKDIR /app/phpmyadmin
