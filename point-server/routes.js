@@ -13,7 +13,8 @@ router.get('/', function (req, res) {
     });
 });
 router.post('/events', function(req, res, next) {
-    const keys = ['uid', 'time', 'ip', 'sdk_version', 'app_name', 'duration', 'referer', 'event_page', 'event_flag', 'content'];
+    let date = null;
+    const keys = ['uid', 'time', 'date', 'ip', 'sdk_version', 'app_name', 'duration', 'referer', 'event_page', 'event_flag', 'content'];
     const sql = 'INSERT INTO `events`' +
         '(`' + keys.join('`, `') + '`)' +
         `VALUES (${Array(keys.length).fill('?').join(', ')});`
@@ -21,11 +22,16 @@ router.post('/events', function(req, res, next) {
     const dataList = keys.map(key => {
         if (key === 'ip' && req.ip) return req.ip;
         if (key === 'referer' && req.get('Referer')) return req.get('Referer');
-        if (key === 'time' && !req.body.time) return new Date().toISOString();
+        if (key === 'time') {
+            const time = req.body.time || new Date().toISOString();
+            date = time.substr(0, 10).replace(/-/g, '');
+            return time;
+        }
+        if (key === 'date') return date;
         return req.body[key] || 'NULL';
     });
 
-    console.log(req.body);
+    debug(req.body);
 
     if (typeof req.body === 'string') {
         try {

@@ -63,4 +63,22 @@ It will expose 80, 3000 and 3306 port for:
 - 3000: point-server
 - 3306: MySQL
 
+## Transfer From Older
+
+### 1.0 -> 1.1
+
+1. Run sql below:
+
+```sql
+ALTER TABLE `events` ADD `date` INT NULL AFTER `uid`;
+ALTER TABLE `events` ADD INDEX(`date`);
+```
+
+2. update `point-server`
+
+3. Run sql, it need some time:
+
+```sql
+UPDATE `events` SET `date` = date_format(time, '%Y%m%d');
+```
 

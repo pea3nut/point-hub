@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： localhost
--- 生成日期： 2019-10-07 11:22:26
+-- 生成日期： 2019-11-09 08:04:52
 -- 服务器版本： 5.5.47-0ubuntu0.14.04.1
 -- PHP 版本： 5.5.9-1ubuntu4.14
 
@@ -31,6 +31,7 @@ CREATE TABLE `events` (
   `event_flag` varchar(100) NOT NULL,
   `content` tinytext NOT NULL,
   `uid` char(20) DEFAULT NULL,
+  `date` int(11) DEFAULT NULL,
   `time` datetime NOT NULL,
   `ip` char(200) NOT NULL,
   `duration` int(12) NOT NULL,
@@ -48,7 +49,8 @@ CREATE TABLE `events` (
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`),
   ADD KEY `app_name` (`app_name`,`event_page`,`event_flag`),
-  ADD KEY `time` (`time`);
+  ADD KEY `time` (`time`),
+  ADD KEY `date` (`date`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
