@@ -32,7 +32,7 @@ class EventSender {
         const mergedContent = Object.assign({}, this.content, content);
 
         const body :EventBody = Object.assign({}, this.defaultOptions, this.userOptions, {
-            content: JSON.stringify(content),
+            content: JSON.stringify(mergedContent),
             event_flag: eventFlag,
         });
 

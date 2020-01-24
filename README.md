@@ -79,6 +79,6 @@ ALTER TABLE `events` ADD INDEX(`date`);
 3. Run sql, it need some time:
 
 ```sql
-UPDATE `events` SET `date` = date_format(time, '%Y%m%d');
+UPDATE `events` SET `date` = date_format(time, '%Y%m%d') where date is NULL;
 ```
 
