@@ -63,6 +63,14 @@ It will expose 80, 3000 and 3306 port for:
 - 3000: point-server
 - 3306: MySQL
 
+## MySQL Password
+
+The first time that you run your container, a new user admin with all privileges will be created in MySQL with a random password. To get the password, check the logs of the container by running:
+
+```bash
+docker logs $CONTAINER_ID
+```
+
 ## Transfer From Older
 
 ### 1.0 -> 1.1
